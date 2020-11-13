@@ -7,7 +7,12 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "ant-design-vue": "^1.7.1",
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.2",
+    "qrcodejs2": "^0.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
