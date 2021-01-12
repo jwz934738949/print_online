@@ -5,10 +5,10 @@
       <div class="print_content">
         <!-- 步骤条 -->
         <a-steps :current="current" class="steps" direction="vertical">
-          <a-step title="开始打印"/>
-          <a-step title="文件上传"/>
-          <a-step title="填写信息"/>
-          <a-step title="确认打印"/>
+          <a-step title="开始打印" />
+          <a-step title="文件上传" />
+          <a-step title="填写信息" />
+          <a-step title="确认打印" />
         </a-steps>
 
         <!-- tabs选项卡 -->
@@ -17,57 +17,56 @@
             <!-- 上传功能 -->
             <div class="upload_wrap">
               <a-upload
-                  class="upload"
-                  name="file"
-                  action="http://47.95.4.133:8080/files/upload"
-                  list-type="picture"
-                  :default-file-list="fileList"
-                  @change="uploadFiles"
-                  :headers="headers"
+                class="upload"
+                name="file"
+                action="http://47.95.4.133:8080/files/upload"
+                list-type="picture"
+                :default-file-list="fileList"
+                @change="uploadFiles"
+                :headers="headers"
               >
                 <a-button>
-                  <a-icon type="upload"/>
+                  <a-icon type="upload" />
                   upload
                 </a-button>
               </a-upload>
 
               <!-- 表格数据 -->
               <a-table
-                  class="table"
-                  :columns="columns"
-                  :data-source="uploadList"
-                  :pagination="{ pageSize: 5 }"
+                class="table"
+                :columns="columns"
+                :data-source="uploadList"
+                :pagination="{ pageSize: 5 }"
               >
                 <span slot="key" slot-scope="text">
                   {{ text }}
                 </span>
                 <div
-                    class="operation"
-                    slot="operation"
-                    slot-scope="text, record"
+                  class="operation"
+                  slot="operation"
+                  slot-scope="text, record"
                 >
                   <div class="pagenum_change">
                     <a-button size="small" ref="subBtn" @click="subNum(record)"
-                    >-
-                    </a-button
-                    >
+                      >-
+                    </a-button>
                     <span>{{ record.copies }}</span>
                     <a-button size="small" @click="addNum(record)">+</a-button>
                   </div>
                   <a-button
-                      class="delete_btn"
-                      type="danger"
-                      size="small"
-                      icon="delete"
-                      @click="showModal"
+                    class="delete_btn"
+                    type="danger"
+                    size="small"
+                    icon="delete"
+                    @click="showModal"
                   ></a-button>
                   <!-- 显示是否删除要打印的文件 -->
                   <a-modal
-                      v-model="visible"
-                      title="删除文件"
-                      ok-text="确认"
-                      cancel-text="取消"
-                      @ok="deleteFile(record.fileid)"
+                    v-model="visible"
+                    title="删除文件"
+                    ok-text="确认"
+                    cancel-text="取消"
+                    @ok="deleteFile(record.fileid)"
                   >
                     <p>您确认删除文件吗？</p>
                   </a-modal>
@@ -84,14 +83,26 @@
               <a-button type="primary" @click="send = true">是</a-button>
               <a-button type="danger" @click="send = false">否</a-button>
             </div>
-            <a-form-model ref="sendFormRef" :model="sendForm" :rules="sendRules" :label-col="labelCol"
-                          :wrapper-col="wrapperCol">
+            <a-form-model
+              ref="sendFormRef"
+              :model="sendForm"
+              :rules="sendRules"
+              :label-col="labelCol"
+              :wrapper-col="wrapperCol"
+            >
               <a-form-model-item label="配送地址" prop="address" v-if="send">
-                <a-input v-model="sendForm.address" placeholder="请输入配送地址"/>
+                <a-input
+                  v-model="sendForm.address"
+                  placeholder="请输入配送地址"
+                />
               </a-form-model-item>
               <a-form-model-item label="取件时间" prop="time" v-if="send">
-                <a-date-picker show-time v-model="sendForm.time" placeholder="请输入取件时间"
-                               style="width: 100%"/>
+                <a-date-picker
+                  show-time
+                  v-model="sendForm.time"
+                  placeholder="请输入取件时间"
+                  style="width: 100%"
+                />
               </a-form-model-item>
               <a-form-model-item label="是否彩印">
                 <a-radio-group v-model="sendForm.isColor">
@@ -107,9 +118,9 @@
               </a-form-model-item>
               <a-form-model-item label="备注" prop="remark">
                 <a-textarea
-                    v-model="sendForm.remark"
-                    placeholder="请输入备注"
-                    :rows="4"
+                  v-model="sendForm.remark"
+                  placeholder="请输入备注"
+                  :rows="4"
                 />
               </a-form-model-item>
             </a-form-model>
@@ -117,9 +128,8 @@
               上一步
             </a-button>
             <a-button type="primary" class="btn" @click="nextBtn"
-            >下一步
-            </a-button
-            >
+              >下一步
+            </a-button>
           </a-tab-pane>
           <a-tab-pane key="3" tab="确认打印">
             <div id="qrCode" ref="qrCodeDiv"></div>
@@ -132,14 +142,14 @@
 
 <script>
 // 导入二维码显示
-import QRCode from 'qrcodejs2'
+import QRCode from "qrcodejs2";
 
 const columns = [
   {
     title: "编号",
     dataIndex: "key",
     width: 70,
-    scopedSlots: {customRender: "key"},
+    scopedSlots: { customRender: "key" },
   },
   {
     title: "文件名",
@@ -154,7 +164,7 @@ const columns = [
   {
     title: "操作",
     dataIndex: "operation",
-    scopedSlots: {customRender: "operation"},
+    scopedSlots: { customRender: "operation" },
     width: 150,
   },
 ];
@@ -175,8 +185,8 @@ export default {
       setid: 0,
       filesid: "",
       orderid: 0,
-      labelCol: {span: 4},
-      wrapperCol: {span: 14},
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
       // 是否选择配送
       send: false,
       sendForm: {
@@ -201,7 +211,7 @@ export default {
           },
         ],
         time: [
-          {required: true, message: "请选择有效时间", trigger: "change"},
+          { required: true, message: "请选择有效时间", trigger: "change" },
         ],
         side: [
           {
@@ -218,6 +228,8 @@ export default {
           },
         ],
       },
+      // 显示二维码
+      QRCodeHidden: false
     };
   },
   created() {
@@ -235,7 +247,7 @@ export default {
 
     // 获取要打印的文件
     async getPrintFile() {
-      const {data: res} = await this.$http.post("/files/showAllNotPay");
+      const { data: res } = await this.$http.post("/files/showAllNotPay");
       this.uploadList = [];
       res.data.forEach((item, index) => {
         let obj = {};
@@ -294,11 +306,11 @@ export default {
 
     // 文件上传成功，点击下一步按钮
     async uploadFinish() {
-      const {data: res} = await this.$http.post("/fileset/sets", {
+      const { data: res } = await this.$http.post("/fileset/sets", {
         fileList: this.uploadList,
       });
-      this.setid = res.data.setid
-      this.filesid = res.data.filesid
+      this.setid = res.data.setid;
+      this.filesid = res.data.filesid;
       this.current++;
       this.activeKey = String(this.current);
     },
@@ -315,29 +327,33 @@ export default {
         if (!valid) {
           return this.$message.error("信息填写失败！");
         }
-        const date = new Date(this.sendForm.time)
+        const date = new Date(this.sendForm.time);
         // 将日期格式转为字符串格式
-        const dateString = this.dateToString(date)
-        const {data: res} = await this.$http.post('/fileset/setsok', {
+        const dateString = this.dateToString(date);
+        const { data: res } = await this.$http.post("/fileset/setsok", {
           address: this.sendForm.address,
           time: dateString,
           colour: this.sendForm.isColor,
           sads: this.sendForm.side,
           remarks: this.sendForm.remark,
-          setid: this.setid
-        })
+          setid: this.setid,
+        });
         if (res.code !== 200) {
-          return this.$message.error("信息上传失败！")
+          return this.$message.error("信息上传失败！");
         }
-        this.$message.success("信息上传成功！")
-        let data = res.data[0]
-        this.orderid = res.data[1]
+        this.$message.success("信息上传成功！");
+        let data = res.data[0];
+        this.orderid = res.data[1];
         this.current++;
         this.activeKey = String(this.current);
+
         this.$nextTick(() => {
-          this.bindQRCode(data)
-        })
-        this.isPay()
+          if (!this.QRCodeHidden) {
+            this.bindQRCode(data);
+            this.QRCodeHidden = true;
+          }
+        });
+        this.isPay();
       });
     },
 
@@ -349,24 +365,40 @@ export default {
         height: 200,
         colorDark: "#333",
         colorLight: "#fff",
-        correctLevel: QRCode.CorrectLevel.L
-      })
+        correctLevel: QRCode.CorrectLevel.L,
+      });
     },
 
     // 验证支付是否成功
     isPay() {
+      let start = new Date();
+      let flag = "none";
       let timer = setInterval(async () => {
-        const {data: res2} = await this.$http.post("/filesorder/states", {
-          orderid: this.orderid
-        })
+        const { data: res2 } = await this.$http.post("/filesorder/states", {
+          orderid: this.orderid,
+        });
         if (res2.code === 200) {
-          clearInterval(timer)
-          this.$message.success("支付成功！")
+          clearInterval(timer);
+          flag = "success";
+          this.$message.success("支付成功！");
+        } else {
+          let end = new Date();
+          if (end - start > 5000) {
+            clearInterval(timer);
+            flag = "error";
+            this.$message.error("支付失败！");
+          }
         }
-      }, 1000)
-    }
+        if (flag === "success" || flag === "error") {
+          // 不论支付成功或者失败，返回第一步
+          this.current = 1;
+          this.activeKey = String(this.current);
+          flag = "none";
+          return;
+        }
+      }, 1000);
+    },
   },
-
 };
 </script>
 

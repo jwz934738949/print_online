@@ -46,7 +46,7 @@ export default {
       menuList: [
         { id: 0, index: "welcome", title: "首页" },
         { id: 1, index: "print", title: "打印" },
-        { id: 2, index: "history", title: "历史订单" },
+        { id: 2, index: "order", title: "历史订单" },
       ],
       // 存储当前所在页面的索引
       pageIndex: "welcome",

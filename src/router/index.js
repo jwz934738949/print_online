@@ -4,6 +4,7 @@ import Login from '../views/Login'
 import Home from "../views/Home/Home"
 import Welcome from "../views/Home/Welcome"
 import Print from "../views/Home/print/Print"
+import Order from "../views/order/Order"
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,10 @@ const routes = [{
       {
         path: '/print',
         component: Print
+      },
+      {
+        path: '/order',
+        component: Order
       }
     ]
   }
