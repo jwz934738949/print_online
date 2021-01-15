@@ -6,6 +6,7 @@
         :columns="columns"
         :data-source="orderList"
         :pagination="{ pageSize: 15 }"
+        :scroll="{ y: 410 }"
       >
         <!-- 状态 -->
         <div class="states_btn" slot="states" slot-scope="text, record">

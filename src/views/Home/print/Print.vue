@@ -403,6 +403,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+.welcome_content {
+  height: 615px;
+}
+
 .print_content {
   margin: 15px;
   padding: 20px;
